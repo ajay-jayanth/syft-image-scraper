@@ -16,7 +16,10 @@ search_limit = st.number_input(label='Enter maximum images to download from each
 submit_button = st.button('Submit')
 
 if st.button('Reset', type='secondary'):
-    shutil.rmtree('downloads')
+    try:
+        shutil.rmtree('downloads')
+    except FileNotFoundError as e:
+        pass
     os.makedirs('downloads', exist_ok=True)
     st.write(os.listdir('downloads'))
 
